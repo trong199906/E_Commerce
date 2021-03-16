@@ -50,7 +50,7 @@ const csrftoken = getCookie('csrftoken');
               <a href="{% url 'cart' %}">
                 <img  id="cart-icon" src="{% static 'image/cart.png' %}">
               </a>
-                <p id="cart-total">1</p>
+                <p id="cart-total">{{CartItems}}</p>
           </div>
 	  </div>
 	</nav>
