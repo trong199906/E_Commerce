@@ -6,8 +6,18 @@ import json
 
 # Create your views here.
 def store(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        CartItems = order.get_card_item
+    else:
+        items = []
+        order = {'get_card_total': 0, 'get_card_item': 0}
+        CartItems = order['get_card_item']
+
     products = Product.objects.all()
-    context = {"products": products}
+    context = {'products': products, 'CartItems': CartItems}
     return render(request, 'store/Store.html', context)
 
 
@@ -16,11 +26,13 @@ def cart(request):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
+        CartItems = order.get_card_item
     else:
         items = []
         order = {'get_card_total': 0, 'get_card_item': 0}
+        CartItems = order['get_card_item']
 
-    context = {'items': items, 'order': order}
+    context = {'items': items, 'order': order, 'CartItems': CartItems}
     return render(request, 'store/Cart.html', context)
 
 
