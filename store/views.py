@@ -41,11 +41,13 @@ def checkout(request):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
+        CartItems = order.get_card_item
     else:
         items = []
         order = {'get_card_total': 0, 'get_card_item': 0}
+        CartItems = order['get_card_item']
 
-    context = {'items': items, 'order': order}
+    context = {'items': items, 'order': order, 'CartItems': CartItems}
     return render(request, 'store/Checkout.html', context)
 
 
