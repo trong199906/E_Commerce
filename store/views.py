@@ -44,7 +44,7 @@ def checkout(request):
         CartItems = order.get_card_item
     else:
         items = []
-        order = {'get_card_total': 0, 'get_card_item': 0}
+        order = {'get_card_total': 0, 'get_card_item': 0, 'shipping':False}
         CartItems = order['get_card_item']
 
     context = {'items': items, 'order': order, 'CartItems': CartItems}
