@@ -18,6 +18,7 @@
                 <br>
                     <div class="box-element hidden" id="payment-info">
                         <small>Paypal Options</small>
+                        <button id="make-payment">Make payment</button>
                     </div>
 
                 <div id="shipping-info">
@@ -71,4 +72,32 @@
     </div>
 </div>
 </div>
+    <script type="text/javascript">
+    let shipping = '{{ order.shipping }}'
+
+    if(shipping == 'False'){
+        document.getElementById('shipping-info').innerHTML = ''
+    }
+    let form = document.getElementById('form')
+        form.addEventListener('submit', function (e){
+            e.preventDefault()
+            console.log('Form submitted...')
+            document.getElementById('form-button').classList.add("hidden");
+            document.getElementById('payment-info').classList.remove('hidden')
+
+
+    })
+
+    document.getElementById('make-payment').addEventListener('click', function (e){
+      submitFormData()
+    })
+
+
+
+
+
+    function submitFormData(){
+        console.log('payment button clicked')
+    }
+    </script>
 {% endblock %}
