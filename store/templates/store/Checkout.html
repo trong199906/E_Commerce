@@ -74,6 +74,7 @@
 </div>
     <script type="text/javascript">
     let shipping = '{{ order.shipping }}'
+    let total = '{{ order.get_card_total | floatformat:2 }}'
 
     if(shipping == 'False'){
         document.getElementById('shipping-info').innerHTML = ''
@@ -108,6 +109,40 @@
     })
 
     function submitFormData(){
+        let userFormData = {
+            name: null,
+            email: null,
+            total : total
+        }
+
+        let ShippingInfo = {
+            'address' : null,
+            'city': null,
+            'state':null,
+            'zipcode': null
+        }
+
+        if (shipping != 'False'){
+            ShippingInfo.address = form.address.value
+            ShippingInfo.city = form.city.value
+            ShippingInfo.state = form.state.value
+            ShippingInfo.zipcode = form.zipcode.value
+        }
+
+        if (user == 'AnonymousUser'){
+            userFormData.name = form.name.value
+            userFormData.email = form.email.value
+        }
+
+        console.log('Shipping info', ShippingInfo)
+        console.log('User Info', userFormData)
+
+
+
+
+
+
+
         console.log('payment button clicked')
     }
     </script>
