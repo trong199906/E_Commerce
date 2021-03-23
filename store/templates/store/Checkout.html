@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row">
     <div class="col-lg-6">
-        <div class="box-element" id="form-wrapped">
+        <div class="box-element hidden" id="form-wrapped">
             <form id="form">
                 <div id="user-info">
                     <div class="form-field">
@@ -15,7 +15,6 @@
                     </div>
 
                 </div>
-                <br>
 
                 <div id="shipping-info">
                     <hr>
@@ -41,15 +40,16 @@
 
                 </div>
                 <hr>
-                <div class="box-element hidden" id="payment-info">
-                        <small>Paypal Options</small>
-                        <button id="make-payment">Make payment</button>
-                </div>
+
 
                 <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
             </form>
 
         </div>
+         <div class="box-element hidden" id="payment-info">
+                        <small>Paypal Options</small>
+                        <button id="make-payment">Make payment</button>
+                </div>
     </div>
 
 
@@ -83,9 +83,14 @@
     }
     if(shipping == 'False' && user != 'AnonymousUser'){
         //hide entire form if user logged in and shipping is false
-        document.getElementById('form-wrapped').classList.add('hidden');
+        document.getElementById('form-wrapped').classList.add("hidden");
         // show payment if logged in user wants to buy an item that does not require shipping
-        document.getElementById('payment-info').classList.remove('hidden');
+        document.getElementById('payment-info').classList.remove("hidden");
+
+    }
+    else {
+        document.getElementById('form-wrapped').classList.remove("hidden");
+        document.getElementById('payment-info').classList.add("hidden");
 
     }
 
@@ -95,7 +100,7 @@
             e.preventDefault()
             console.log('Form submitted...')
             document.getElementById('form-button').classList.add("hidden")
-            document.getElementById('payment-info').classList.remove('hidden')
+            document.getElementById('payment-info').classList.remove("hidden")
     })
 
     document.getElementById('make-payment').addEventListener('click', function (e){
