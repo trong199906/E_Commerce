@@ -44,7 +44,7 @@ def checkout(request):
         CartItems = order.get_card_item
     else:
         items = []
-        order = {'get_card_total': 0, 'get_card_item': 0, 'shipping':False}
+        order = {'get_card_total': 0, 'get_card_item': 0, 'shipping': False}
         CartItems = order['get_card_item']
 
     context = {'items': items, 'order': order, 'CartItems': CartItems}
@@ -72,3 +72,8 @@ def updated_item(request):
         orderitem.delete()
 
     return JsonResponse('Item was added', safe=False)
+
+
+def ProcessOrder(request):
+    print('Data:', request.body)
+    return JsonResponse('Payment complete', safe=False)
