@@ -61,10 +61,10 @@ def updated_item(request):
     return JsonResponse('Item was added', safe=False)
 
 
-from django.views.decorators.csrf import csrf_exempt
-
-
-@csrf_exempt
+# from django.views.decorators.csrf import csrf_exempt
+#
+#
+# @csrf_exempt
 def ProcessOrder(request):
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
